@@ -2,11 +2,13 @@
 
 A marketplace of skills for AI coding agents. One repo, many agents — start where you are.
 
+Layout is harness-first: each harness gets a folder (`claude/`, `opencode/`, ...) holding the same-named skill, flavored for that harness's mechanics.
+
 ## Skills
 
 | Skill | What it does | Claude Code | opencode |
 | --- | --- | --- | --- |
-| [agent-topics](plugins/agent-topics/skills/agent-topics/SKILL.md) | Split a discussion into topics, one background subagent per topic. Chat with each agent directly; they sleep between messages and report back only when told to wrap. | ✅ | 🚧 planned |
+| [agent-topics](claude/agent-topics/skills/agent-topics/SKILL.md) | Split a discussion into topics, one subagent per topic. Chat with each agent directly; they idle between messages and report back only when told to wrap. | ✅ | 🚧 in progress |
 
 ## Install — Claude Code
 
@@ -33,12 +35,14 @@ Copy the skill folder into your personal skills directory:
 ```sh
 git clone https://github.com/codechriscode/skills
 mkdir -p ~/.claude/skills
-cp -r skills/plugins/agent-topics/skills/agent-topics ~/.claude/skills/
+cp -r skills/claude/agent-topics/skills/agent-topics ~/.claude/skills/
 ```
 
 ## Install — opencode
 
-Coming soon. The opencode flavor of `agent-topics` is in progress and will land under [`skills/`](skills/).
+In progress — the opencode flavor of `agent-topics` is being tested and is not published yet.
+
+> Both flavors share the skill name. Install only the flavor for your harness: opencode also reads `~/.claude/skills/`, so having both flavors in directories it scans causes a name collision.
 
 ## For maintainers
 
