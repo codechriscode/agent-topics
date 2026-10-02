@@ -40,7 +40,7 @@ cp -r skills/claude/agent-topics/skills/agent-topics ~/.claude/skills/
 
 ## Install — opencode
 
-In progress — the opencode flavor of `agent-topics` is being tested and is not published yet.
+In progress — the opencode flavor of `agent-topics` is being tested and is not published yet. It ships a `SKILL.md` plus a `/agent-topics` command (a `.opencode/command/agent-topics.md` file) so the skill can also be invoked as a literal slash command.
 
 > Both flavors share the skill name. Install only the flavor for your harness: opencode also reads `~/.claude/skills/`, so having both flavors in directories it scans causes a name collision.
 
