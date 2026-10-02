@@ -1,0 +1,12 @@
+{
+  "name": "agent-topics",
+  "description": "Split a discussion into topics, one background subagent per topic that the user chats with directly",
+  "version": "1.0.0",
+  "author": {
+    "name": "Chris"
+  },
+  "homepage": "https://github.com/codechriscode/skills",
+  "repository": "https://github.com/codechriscode/skills",
+  "license": "MIT",
+  "keywords": ["subagents", "topics", "parallel-work"]
+}

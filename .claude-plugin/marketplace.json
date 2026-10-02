@@ -1,0 +1,16 @@
+{
+  "name": "skills",
+  "description": "A marketplace of skills for AI coding agents",
+  "owner": {
+    "name": "Chris"
+  },
+  "plugins": [
+    {
+      "name": "agent-topics",
+      "source": "./plugins/agent-topics",
+      "description": "Split a discussion into topics, one background subagent per topic that the user chats with directly",
+      "category": "collaboration",
+      "keywords": ["subagents", "topics", "parallel-work"]
+    }
+  ]
+}
