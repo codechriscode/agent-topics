@@ -1,6 +1,6 @@
 # Skills
 
-A marketplace of skills for AI coding agents. One repo, many agents — start where you are.
+A repo you can add as marketplace of skills. One repo, many agents — start where you are.
 
 Layout is harness-first: each harness gets a folder (`claude/`, `opencode/`, ...) holding the same-named skill, flavored for that harness's mechanics.
 
