@@ -1,4 +1,4 @@
-# Skills
+# agent-topics
 
 A repo you can add as marketplace of skills. One repo, many agents — start where you are.
 
@@ -15,15 +15,15 @@ Layout is harness-first: each harness gets a folder (`claude/`, `opencode/`, ...
 Add this repo as a plugin marketplace and install the skill:
 
 ```sh
-claude plugin marketplace add codechriscode/skills
-claude plugin install agent-topics@skills
+claude plugin marketplace add codechriscode/agent-topics
+claude plugin install agent-topics@agent-topics
 ```
 
 Or from inside a session:
 
 ```
-/plugin marketplace add codechriscode/skills
-/plugin install agent-topics@skills
+/plugin marketplace add codechriscode/agent-topics
+/plugin install agent-topics@agent-topics
 ```
 
 The skill loads as `agent-topics` (prefixed `agent-topics:` in plugin context). Restart your session or run `/reload-plugins` if it doesn't show up right away.
@@ -33,9 +33,9 @@ The skill loads as `agent-topics` (prefixed `agent-topics:` in plugin context). 
 Copy the skill folder into your personal skills directory:
 
 ```sh
-git clone https://github.com/codechriscode/skills
+git clone https://github.com/codechriscode/agent-topics
 mkdir -p ~/.claude/skills
-cp -r skills/claude/agent-topics/skills/agent-topics ~/.claude/skills/
+cp -r agent-topics/claude/agent-topics/skills/agent-topics ~/.claude/skills/
 ```
 
 ## Install — opencode (in progress, being tested)
@@ -43,10 +43,10 @@ cp -r skills/claude/agent-topics/skills/agent-topics ~/.claude/skills/
 The opencode flavor ships two files, and opencode keeps skills and commands in separate directories, so both get copied:
 
 ```sh
-git clone https://github.com/codechriscode/skills
+git clone https://github.com/codechriscode/agent-topics
 mkdir -p ~/.config/opencode/skills/agent-topics ~/.config/opencode/command
-cp skills/opencode/agent-topics/SKILL.md ~/.config/opencode/skills/agent-topics/
-cp skills/opencode/agent-topics/command/agent-topics.md ~/.config/opencode/command/
+cp agent-topics/opencode/agent-topics/SKILL.md ~/.config/opencode/skills/agent-topics/
+cp agent-topics/opencode/agent-topics/command/agent-topics.md ~/.config/opencode/command/
 ```
 
 `/agent-topics <topics>` then works as a literal slash command, and the skill also triggers by phrase.
