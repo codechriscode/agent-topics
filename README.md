@@ -1,8 +1,7 @@
 # agent-topics
 
-A repo you can add as marketplace of skills. One repo, many agents — start where you are.
-
-Layout is harness-first: each harness gets a folder (`claude/`, `opencode/`, ...) holding the same-named skill, flavored for that harness's mechanics.
+Talk to subagents clutter-free until you reach a conclusion with them, then unite everything in the main session.
+Great for keeping many things on track at once and dividing your focus with intent.
 
 ## Skills
 
