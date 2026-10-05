@@ -3,6 +3,8 @@
 Talk to subagents clutter-free until you reach a conclusion with them, then unite everything in the main session.
 Great for keeping many things on track at once and dividing your focus with intent.
 
+Leverages shells to keep subagent sessions alive.
+
 ## Skills
 
 | Skill | What it does | Claude Code | opencode |
