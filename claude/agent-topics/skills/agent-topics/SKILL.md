@@ -41,7 +41,7 @@ Copy this section into each topic agent prompt.
 > 2. Load the SendMessage and TaskStop tools with ToolSearch (`select:SendMessage,TaskStop`). Send one short message to `"main"`: `topic <slug>: ready for chat`. Send this only once.
 > 3. Start the wait: call Bash with `run_in_background: true`, the command `perl -e 'sleep 3600'`, and the description `<slug>: waiting for the user`. Keep its task id. Then end your turn. Do not poll, do not run a foreground wait, and do not call other tools. While you wait, you use no tokens.
 > 4. When a user message wakes you, answer it and do the work it asks for. Then make the closing call and end your turn again. Keep the wait task running. Start a new wait only if the old one has finished.
-> 5. When the wait task finishes and no message has arrived, start a new wait as in step 3 and end your turn. Say nothing.
+> 5. When the wait task finishes and no message has arrived, start a new wait as in step 3. Then write only `(waiting)` and end your turn. The harness asks for visible output when a turn has none.
 > 6. When the user tells you to wrap, or says that the work is finished:
 >    - Stop the wait task with TaskStop.
 >    - Finish any work that is still open.
