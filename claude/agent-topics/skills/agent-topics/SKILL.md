@@ -19,7 +19,7 @@ The main session starts one background subagent for each topic. The user talks t
 4. Wait. Do not relay messages and do not poll.
    - A notice that says "stopped with background work still running" is an interim notice. Ignore it.
    - A "ready" or "waiting" message from a topic agent needs no action. Do not repeat it to the user.
-5. When a topic agent sends its final report, record it. When every topic has a final report, give the user one combined summary: for each topic, the result, the decisions, the changed files, and the open items.
+5. When a topic agent sends its final report, record it. If the report contains a file with its target path, write that file. The harness blocks report files that subagents write, so the main session writes them. When every topic has a final report, give the user one combined summary: for each topic, the result, the decisions, the changed files, and the open items.
 
 ## Topic agent protocol
 
@@ -33,15 +33,19 @@ Copy this section into each topic agent prompt.
 >
 > **Start every tool call description with `<slug>: `.** Example: `<slug>: Run the tests`. The UI shows the description of your latest tool call as your status, beside your agent type. The prefix shows the user which topic the status belongs to. This applies to every tool that takes a description, Bash included.
 >
+> **End every turn with the closing call, except the wrap turn.** Some tools have no description field, for example ToolSearch and MCP tools. After such a call, the UI makes up a status text. So the last tool call of each turn must be Bash with the command `true` and the description `<slug>: waiting for the user`. The wait call in step 3 has the same description, so a turn that ends with it needs no closing call.
+>
+> **Report files.** If Write fails with `Subagents should return findings as text, not write report files`, do not try again and do not work around it. Tell the user that the main session writes the file at wrap. Put the full file content and its target path in your final report.
+>
 > 1. Do the first work on the topic. Then answer the user with your result and any questions.
 > 2. Load the SendMessage and TaskStop tools with ToolSearch (`select:SendMessage,TaskStop`). Send one short message to `"main"`: `topic <slug>: ready for chat`. Send this only once.
-> 3. Start the wait: call Bash with `run_in_background: true`, the command `perl -e 'sleep 3600'`, and the description `<slug>: waiting for the user`. Keep its task id. Then end your turn. Do not poll, do not run a foreground wait, and do not call other tools, except the closing `true` call in fork mode. While you wait, you use no tokens.
-> 4. When a user message wakes you, answer it and do the work it asks for. Then end your turn again. Keep the wait task running. Start a new wait only if the old one has finished.
+> 3. Start the wait: call Bash with `run_in_background: true`, the command `perl -e 'sleep 3600'`, and the description `<slug>: waiting for the user`. Keep its task id. Then end your turn. Do not poll, do not run a foreground wait, and do not call other tools. While you wait, you use no tokens.
+> 4. When a user message wakes you, answer it and do the work it asks for. Then make the closing call and end your turn again. Keep the wait task running. Start a new wait only if the old one has finished.
 > 5. When the wait task finishes and no message has arrived, start a new wait as in step 3 and end your turn. Say nothing.
 > 6. When the user tells you to wrap, or says that the work is finished:
 >    - Stop the wait task with TaskStop.
 >    - Finish any work that is still open.
->    - Send your final report and stop. The report gives the product of the conversation: the result, the decisions, the changed files, and the open items. Do not repeat the chat. Keep it short. The main session keeps it in its context.
+>    - Send your final report and stop. The report gives the product of the conversation: the result, the decisions, the changed files, and the open items. Add each file that the harness blocked, with its target path and full content. Do not repeat the chat. Keep it short. The main session keeps it in its context.
 >
 > Never wrap by yourself. Only the user decides when the topic is finished.
 
@@ -51,7 +55,7 @@ Add this rule to the prompt of a fork topic agent.
 
 > **End each chat turn with a closing line.** The main session gets the last text of each of your turns. To keep the chat out of the main session, end every turn except the wrap turn in this order:
 > 1. Write your full answer to the user. This step is mandatory. The user reads it in the subagent view. Never shorten it or skip it because of this rule.
-> 2. Run Bash with the command `true` and the description `<slug>: idle`.
+> 2. Make the closing call: Bash with the command `true` and the description `<slug>: waiting for the user`.
 > 3. Write only `(idle)` and end your turn.
 >
 > In the wrap turn, do not do this. Your final report must be the last text of that turn.
